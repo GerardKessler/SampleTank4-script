@@ -54,6 +54,15 @@ sleep 750
 speech := new Categories("Script iniciado", "", "", "")
 speech.speak()
 
+comandos := ["Shift aplicaciones; despliega el menú contextual para seleccionar el canal"
+,"shift retroceso; vuelve a la ventana principal"
+,"shift flecha abajo; enfoca la siguiente categoría"
+,"shift flecha arriba; enfoca la anterior categoría"
+,"shift intro; activa o desactiva la categoría con el foco"
+,"flecha abajo flecha derecha; activa el siguiente preset"
+,"flecha arriba flecha derecha; activa el anterior preset"
+,"shift q; cierra el script"]
+
 cl := array()
 cl[1] := new Categories("Arpeggio", 199, 103, "no marcado")
 cl[2] := new Categories("Bass", 301, 136, "no marcado")
@@ -79,6 +88,7 @@ cl[21] := new Categories("Woodwinds", "", "", "no marcado")
 
 w:=False
 x=0
+y=0
 
 #ifWinActive, SampleTank 4
 +down::
@@ -145,6 +155,25 @@ speech := new Categories("Script finalizado", "", "", "")
 speech.speak()
 sleep 1000
 exitApp
+
++f1::
+y++
+if y <= % comandos.maxIndex()
+	{
+	speech := new Categories(comandos[y], "", "", "")
+	speech.speak()
+	}
+else {
+	y=1
+	speech := new Categories(comandos[y], "", "", "")
+	speech.speak()
+	}
+	return
+
+f1::
+speech := new Categories("Pulsa shift f1 para ir conmutando entre la verbalización de los distintos comandos del script", "", "", "")
+speech.speak()
+return
 
 channels(ItemName, ItemPos, MenuName) {
 	yCoords := [136,205,278,352,425,500,571,650]
